@@ -41,10 +41,14 @@
         border-radius: 3px;
       }
       #features {
-        top: 0;
-        height: 100px;
-        margin-top: 20px;
-        width: 250px;
+        top: 20px;
+        left: 20px;
+        height: auto;
+        width: 300px; 
+        padding: 15px; 
+        font-size: 16px;
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 5px;
       }
       #legend {
         padding: 10px;
@@ -82,8 +86,8 @@
       const map = new mapboxgl.Map({
         container: 'map', // container ID
         style: 'mapbox://styles/mapbox/light-v10', // style URL
-        zoom: 3, // starting zoom
-        center: [-100, 40] // starting center
+        zoom: 6, // starting zoom
+        center: [-120, 47] // starting center
       });
       async function geojsonFetch() { 
           let response = await fetch('assets/wa-covid-data-102521.geojson');
@@ -122,39 +126,47 @@
               }
             });
             const layers = [
-              '0-9',
-              '10-19',
-              '20-49',
-              '50-99',
-              '100-199',
-              '200-499',
-              '500-999',
-              '1000 and more'
+                '0-9',
+                '10-49',
+                '50-99', 
+                '100-199', 
+                '200-499', 
+                '500-999', 
+                '1000+'
             ];
             const colors = [
-              '#FFEDA070',
-              '#FED97670',
-              '#FEB24C70',
-              '#FD8D3C70',
-              '#FC4E2A70',
-              '#E31A1C70',
-              '#BD002670',
-              '#80002670'
+                '#FFEDA0', 
+                '#FED976',
+                '#FEB24C', 
+                '#FD8D3C', 
+                '#FC4E2A', 
+                '#E31A1C', 
+                '#BD0026'
             ];
             const legend = document.getElementById('legend');
               legend.innerHTML = "<b>Cumulative Covid Cases<br>(per 10k people)</b><br><br>";  
               layers.forEach((layer, i) => {
-                const color = colors[i];
-                const item = document.createElement('div');
-                const key = document.createElement('span');
-                key.className = 'legend-key';
-                key.style.backgroundColor = color;
-                const value = document.createElement('span');
-                value.innerHTML = `${layer}`;
-                item.appendChild(key);
-                item.appendChild(value);
-                legend.appendChild(item);
-              });
+                  const color = colors[i];
+                  const item = document.createElement('div');
+                  item.style.display = "flex";
+                  item.style.alignItems = "center";
+                  item.style.marginBottom = "5px";
+                
+                  const key = document.createElement('span');
+                  key.className = 'legend-key';
+                  key.style.backgroundColor = color;
+                  key.style.width = "15px";
+                  key.style.height = "15px";
+                  key.style.borderRadius = "3px";
+                  key.style.marginRight = "8px";
+                
+                  const value = document.createElement('span');
+                  value.innerHTML = `${layer}`;
+                
+                  item.appendChild(key);
+                  item.appendChild(value);
+                  legend.appendChild(item);
+                });
               map.on('mousemove', (event) => {
     const county = map.queryRenderedFeatures([event.point.x, event.point.y], {
         layers: ['waData-layer']
