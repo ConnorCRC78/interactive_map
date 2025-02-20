@@ -41,14 +41,10 @@
         border-radius: 3px;
       }
       #features {
-        top: 20px;
-        left: 20px;
-        height: auto;
-        width: 300px; 
-        padding: 15px; 
-        font-size: 16px;
-        background-color: rgba(255, 255, 255, 0.9);
-        border-radius: 5px;
+        top: 0;
+        height: 130px;
+        margin-top: 20px;
+        width: 250px;
       }
       #legend {
         padding: 10px;
@@ -104,7 +100,7 @@
               'paint': {
                 'fill-color': [
                   'step',
-                  ['get', 'cases_per_10k'],
+                  ['get', 'casesPer10k'],
                   '#FFEDA0',   // stop_output_0
                   10,          // stop_input_0
                   '#FED976',   // stop_output_1
