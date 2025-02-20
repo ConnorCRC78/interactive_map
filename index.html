@@ -101,26 +101,24 @@
                 'fill-color': [
                   'step',
                   ['get', 'casePer10k'],
-                  '#FFEDA0', 10, 
-                  '#FED976', 50, 
-                  '#FEB24C', 100, 
-                  '#FD8D3C', 200, 
-                  '#FC4E2A', 500, 
-                  '#E31A1C', 1000, 
-                  '#BD0026'
+                  '#FFEDA0', 200, 
+                  '#FED976', 500, 
+                  '#FEB24C', 750, 
+                  '#FD8D3C', 1000, 
+                  '#FC4E2A', 1250
+                  '#E31A1C',
                 ],
                 'fill-outline-color': '#BBBBBB',
                 'fill-opacity': 0.7
               }
             });
             const layers = [
-                '0-9',
-                '10-49',
-                '50-99', 
-                '100-199', 
-                '200-499', 
-                '500-999', 
-                '1000+'
+                '0-199',
+                '200-499',
+                '500-749', 
+                '750-999', 
+                '1000-1249', 
+                '1250+'
             ];
             const colors = [
                 '#FFEDA0', 
@@ -129,7 +127,6 @@
                 '#FD8D3C', 
                 '#FC4E2A', 
                 '#E31A1C', 
-                '#BD0026'
             ];
             const legend = document.getElementById('legend');
               legend.innerHTML = "<b>Cumulative Covid Cases<br>(per 10k people)</b><br><br>";  
