@@ -85,7 +85,6 @@
         center: [-100, 40] // starting center
       });
       async function geojsonFetch() { 
-        geojsonFetch();
           let response = await fetch('assets/state_data.geojson');
           let stateData = await response.json();
           map.on('load', function loadingData() {
