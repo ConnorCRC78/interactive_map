@@ -100,7 +100,7 @@
               'paint': {
                 'fill-color': [
                   'step',
-                  ['get', 'density'],
+                  ['get', 'cases_per_10k'],
                   '#FFEDA0',   // stop_output_0
                   10,          // stop_input_0
                   '#FED976',   // stop_output_1
@@ -142,7 +142,7 @@
               '#80002670'
             ];
             const legend = document.getElementById('legend');
-              legend.innerHTML = "<b>Population Density<br>(people/sq.mi.)</b><br><br>";  
+              legend.innerHTML = "<b>Cumulative Covid Cases<br>(per 10k people)</b><br><br>";  
               layers.forEach((layer, i) => {
                 const color = colors[i];
                 const item = document.createElement('div');
@@ -160,7 +160,7 @@
         layers: ['waData-layer']
     });
                 document.getElementById('text-description').innerHTML = county.length ?
-                `<h3>${county[0].properties.name}</h3><p><strong><em>${county[0].properties.density}</strong> people per square mile</em></p>` :
+                `<h3>${county[0].properties.name}</h3><p><strong><em>${county[0].properties.casePer10k}</strong> people per square mile</em></p>` :
                 `<p>Hover over a county!</p>`;
               });
             });
