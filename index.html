@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Interactive Web Mapping</title>
+    <title>Interactive Covid Map</title>
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.5.0/mapbox-gl.js"></script>
@@ -71,9 +71,9 @@
 <body>
     <div id="map"></div>
     <div class='map-overlay' id='features'>
-        <h2>US population density</h2>
+        <h2>Cumulative Covid Cases (per 10k people)</h2>
         <div id='text-description'>
-            <p>Hover over a state!</p>
+            <p>Hover over a county!</p>
         </div>
     </div>
     <div class='map-overlay' id='legend'></div>
@@ -86,17 +86,17 @@
         center: [-100, 40] // starting center
       });
       async function geojsonFetch() { 
-          let response = await fetch('assets/state_data.geojson');
-          let stateData = await response.json();
+          let response = await fetch('assets/wa-covid-data-102521.geojson');
+          let waData = await response.json();
           map.on('load', function loadingData() {
-            map.addSource('stateData', {
+            map.addSource('waData', {
               type: 'geojson',
-              data: stateData
+              data: waData
             });
             map.addLayer({
-              'id': 'stateData-layer',
+              'id': 'waData-layer',
               'type': 'fill',
-              'source': 'stateData',
+              'source': 'waData',
               'paint': {
                 'fill-color': [
                   'step',
@@ -156,12 +156,12 @@
                 legend.appendChild(item);
               });
               map.on('mousemove', (event) => {
-    const state = map.queryRenderedFeatures([event.point.x, event.point.y], {
-        layers: ['stateData-layer']
+    const county = map.queryRenderedFeatures([event.point.x, event.point.y], {
+        layers: ['waData-layer']
     });
-                document.getElementById('text-description').innerHTML = state.length ?
-                `<h3>${state[0].properties.name}</h3><p><strong><em>${state[0].properties.density}</strong> people per square mile</em></p>` :
-                `<p>Hover over a state!</p>`;
+                document.getElementById('text-description').innerHTML = county.length ?
+                `<h3>${county[0].properties.name}</h3><p><strong><em>${county[0].properties.density}</strong> people per square mile</em></p>` :
+                `<p>Hover over a county!</p>`;
               });
             });
         }
